@@ -1,28 +1,37 @@
-EmpowerSIP AI 🤖💰
+EmpowerSIP AI 🌱
 
-An AI-driven SIP (Systematic Investment Plan) platform designed for first-time investors in India.
-
-## 🚀 About the Project
-EmpowerSIP AI simplifies mutual fund investments for beginners by using AI to provide personalized SIP recommendations based on income, goals, and risk appetite.
+An AI-driven platform that analyzes your monthly expenses and suggests a **safe SIP amount** that automatically increases, decreases, or pauses based on your financial situation.
 
 ## 🎯 Problem Statement
-Most first-time investors in India don't know where to start with SIP investments. EmpowerSIP AI bridges this gap with intelligent, data-driven guidance.
+Most first-time investors in India — especially women and students — don't know how much to invest safely. EmpowerSIP AI solves this by making SIP decisions intelligent and stress-free.
 
 ## ✨ Features
-- AI-based personalized SIP recommendations
-- Risk appetite analysis
-- Goal-based investment planning
-- Simple and beginner-friendly interface
+- AI-based safe SIP recommendation
+- Auto-adjustment (increase / decrease / pause) based on monthly expenses
+- Emergency buffer protection
+- Financial discipline score
+- SIP Learning Hub for beginners
+- Micro-SIP starting from ₹100
+- Beginner-friendly — no finance jargon
 
-## 🛠️ Tech Stack
-- Python
-- Machine Learning
-- Data Analysis
-- Streamlit (UI)
+## 📄 Pages
+- Landing Page
+- How Safe SIP Works
+- Expense-Based SIP Calculator
+- Auto-Adjustment Dashboard
+- SIP Learning Hub
+- Women & Student Focus Section
+- Trust & Safety Page
+- Sign-Up / Waitlist Page
 
-## 📌 Built For
-College Hackathon — KL University Hyderabad
+## 🛠 Tech Stack
+- React.js
+- HTML5 / CSS3
+- JavaScript (AI mock logic)
+
+## 🚀 Live Demo
+Coming soon
 
 ## 👩‍💻 Author
-Nuka Sri Vyshnavi
+Nuka Sri Vyshnavi  
 B.Tech ECE — KL University Hyderabad

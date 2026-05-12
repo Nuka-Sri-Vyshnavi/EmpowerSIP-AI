@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmpowerSIP AI — Smart SIP for Everyone</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --mint:#1D9E75;--mint-light:#E1F5EE;--mint-mid:#9FE1CB;
+      --coral:#D85A30;--coral-light:#FAECE7;
+      --amber:#BA7517;--amber-light:#FAEEDA;
+      --text:#2C2C2A;--text2:#5F5E5A;--text3:#888780;
+      --bg:#F9FBF9;--card:#fff;--border:rgba(0,0,0,0.08);
+      --radius:14px;--font:'DM Sans',sans-serif;--serif:'Fraunces',serif;
+    }
+    body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+    .page{display:none;animation:fadeIn 0.3s ease}
+    .page.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    nav{background:#fff;border-bottom:0.5px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+    .logo{font-family:var(--serif);font-size:18px;color:var(--mint);cursor:pointer}
+    .nav-links{display:flex;gap:4px}
+    .nav-links button{background:none;border:none;font-size:13px;color:var(--text2);padding:6px 10px;border-radius:8px;cursor:pointer;font-family:var(--font)}
+    .nav-links button:hover{background:var(--mint-light);color:var(--mint)}
+    .nav-cta{background:var(--mint);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;cursor:pointer;font-family:var(--font);font-weight:500}
+    .nav-cta:hover{background:#0F6E56}
+
+    .hero{padding:60px 24px 48px;max-width:680px;margin:0 auto;text-align:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--mint-light);color:#0F6E56;font-size:12px;padding:4px 12px;border-radius:20px;margin-bottom:20px;font-weight:500}
+    .hero h1{font-family:var(--serif);font-size:38px;font-weight:600;line-height:1.2;margin-bottom:16px;color:var(--text)}
+    .hero h1 em{color:var(--mint);font-style:italic}
+    .hero p{font-size:16px;color:var(--text2);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{background:var(--mint);color:#fff;border:none;padding:12px 24px;border-radius:24px;font-size:15px;cursor:pointer;font-family:var(--font);font-weight:500}
+    .btn-primary:hover{background:#0F6E56}
+    .btn-secondary{background:#fff;color:var(--mint);border:1.5px solid var(--mint);padding:12px 24px;border-radius:24px;font-size:15px;cursor:pointer;font-family:var(--font);font-weight:500}
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:680px;margin:32px auto 0;padding:0 24px}
+    .stat-card{background:#fff;border:0.5px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+    .stat-num{font-size:24px;font-weight:600;color:var(--mint)}
+    .stat-label{font-size:12px;color:var(--text3);margin-top:2px}
+
+    .section{padding:48px 24px;max-width:680px;margin:0 auto}
+    .section-tag{font-size:12px;color:var(--mint);font-weight:500;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+    .section h2{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:8px}
+    .section .sub{color:var(--text2);margin-bottom:28px}
+
+    .card{background:#fff;border:0.5px solid var(--border);border-radius:var(--radius);padding:20px}
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+    .feature-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px}
+    .card h3{font-size:14px;font-weight:500;margin-bottom:4px}
+    .card p{font-size:13px;color:var(--text2)}
+
+    .calc-wrap{background:#fff;border:0.5px solid var(--border);border-radius:var(--radius);padding:24px;max-width:680px;margin:0 auto}
+    .input-row{margin-bottom:20px}
+    .input-row label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;color:var(--text2)}
+    .input-row input[type=range]{width:100%}
+    .input-row .val{font-size:18px;font-weight:600;color:var(--mint)}
+    .result-box{background:var(--mint-light);border-radius:12px;padding:20px;margin-top:20px;text-align:center}
+    .result-amount{font-size:36px;font-weight:600;color:var(--mint);font-family:var(--serif)}
+    .risk-bar{height:8px;background:#e0e0e0;border-radius:4px;margin:12px 0;overflow:hidden}
+    .risk-fill{height:100%;border-radius:4px;transition:width 0.4s}
+    .explanation{font-size:13px;color:#0F6E56;margin-top:12px;line-height:1.5}
+
+    .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+    .dash-card{background:#fff;border:0.5px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+    .dash-card .num{font-size:20px;font-weight:600}
+    .dash-card .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+    .history-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border:0.5px solid var(--border);border-radius:10px;margin-bottom:8px}
+    .badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+    .badge.up{background:var(--mint-light);color:#0F6E56}
+    .badge.down{background:var(--coral-light);color:#993C1D}
+    .badge.pause{background:var(--amber-light);color:#854F0B}
+    .badge.stable{background:#F1EFE8;color:#444441}
+
+    .learn-card{background:#fff;border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+    .learn-card h3{font-size:15px;font-weight:500;margin-bottom:6px}
+    .learn-card p{font-size:13px;color:var(--text2)}
+    .tip-box{background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:#633806;margin-top:12px}
+
+    .highlight-card{background:linear-gradient(135deg,var(--mint-light),#fff);border:0.5px solid var(--mint-mid);border-radius:var(--radius);padding:24px;margin-bottom:12px}
+    .micro-sip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+    .sip-pill{background:#fff;border:1px solid var(--mint-mid);border-radius:20px;padding:8px;text-align:center;font-size:13px;font-weight:500;color:var(--mint)}
+
+    .trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+
+    .signup-wrap{background:var(--mint);border-radius:20px;padding:40px 24px;text-align:center;color:#fff;max-width:500px;margin:0 auto}
+    .signup-wrap h2{font-family:var(--serif);font-size:26px;margin-bottom:8px}
+    .signup-wrap p{opacity:0.85;margin-bottom:24px;font-size:14px}
+    .email-row{display:flex;gap:8px;max-width:380px;margin:0 auto}
+    .email-row input{flex:1;padding:10px 14px;border-radius:20px;border:none;font-size:14px;font-family:var(--font)}
+    .email-row button{background:#fff;color:var(--mint);border:none;padding:10px 18px;border-radius:20px;font-weight:500;cursor:pointer;font-size:14px;font-family:var(--font)}
+    .success-msg{display:none;background:rgba(255,255,255,0.2);border-radius:10px;padding:10px;margin-top:12px;font-size:13px}
+
+    .steps{counter-reset:step}
+    .step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+    .step-num{min-width:32px;height:32px;border-radius:50%;background:var(--mint);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500}
+    .step-content h3{font-size:14px;font-weight:500;margin-bottom:3px}
+    .step-content p{font-size:13px;color:var(--text2)}
+    .step-connector{width:2px;background:var(--mint-mid);height:20px;margin-left:15px}
+
+    footer{border-top:0.5px solid var(--border);padding:16px 24px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;background:#fff;margin-top:20px}
+    footer button{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;font-family:var(--font)}
+    footer button:hover{color:var(--mint)}
+    footer span{color:var(--border)}
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo" onclick="goPage('home')">EmpowerSIP</span>
+  <div class="nav-links">
+    <button onclick="goPage('how')">How it works</button>
+    <button onclick="goPage('calc')">Calculator</button>
+    <button onclick="goPage('learn')">Learn</button>
+    <button onclick="goPage('trust')">Trust</button>
+  </div>
+  <button class="nav-cta" onclick="goPage('signup')">Get early access</button>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">🌱 Smart investing for beginners</div>
+    <h1>Invest only what you can <em>safely afford</em></h1>
+    <p>EmpowerSIP AI analyzes your monthly expenses and suggests a SIP amount that automatically adjusts — so you never overpromise your savings.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="goPage('calc')">Find my safe SIP amount</button>
+      <button class="btn-secondary" onclick="goPage('how')">See how it works</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-num">₹100</div><div class="stat-label">Minimum SIP</div></div>
+    <div class="stat-card"><div class="stat-num">3 min</div><div class="stat-label">Setup time</div></div>
+    <div class="stat-card"><div class="stat-num">Auto</div><div class="stat-label">Adjusts monthly</div></div>
+  </div>
+  <div class="section">
+    <div class="section-tag">Why EmpowerSIP</div>
+    <h2>Built for real people with variable income</h2>
+    <p class="sub">Not everyone earns the same every month. Our AI understands that.</p>
+    <div class="card-grid">
+      <div class="card"><div class="feature-icon" style="background:var(--mint-light)">🧠</div><h3>AI-powered analysis</h3><p>Understands your income and expense patterns to find your true disposable income.</p></div>
+      <div class="card"><div class="feature-icon" style="background:var(--coral-light)">🔄</div><h3>Auto-adjusts SIP</h3><p>Increases, decreases, or pauses your SIP based on your monthly financial situation.</p></div>
+      <div class="card"><div class="feature-icon" style="background:var(--amber-light)">🛡️</div><h3>Emergency buffer</h3><p>Always keeps a safety buffer untouched before recommending any investment amount.</p></div>
+      <div class="card"><div class="feature-icon" style="background:#F1EFE8">📊</div><h3>Clear explanations</h3><p>Explains every change in simple language — no finance jargon, ever.</p></div>
+    </div>
+    <div style="margin-top:24px;text-align:center">
+      <button class="btn-primary" onclick="goPage('women')">Made for women & students →</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="page" id="page-how">
+  <div class="section">
+    <div class="section-tag">How it works</div>
+    <h2>From your expenses to your safe SIP</h2>
+    <p class="sub">Six simple steps, no financial expertise needed.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><h3>Enter your monthly income</h3><p>Just your take-home salary or any income you receive regularly.</p></div></div>
+      <div class="step-connector"></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><h3>List your fixed expenses</h3><p>Rent, EMIs, subscriptions — things you must pay every month.</p></div></div>
+      <div class="step-connector"></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><h3>Estimate variable expenses</h3><p>Food, transport, shopping — these change monthly, so we use averages.</p></div></div>
+      <div class="step-connector"></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><h3>Set your emergency buffer</h3><p>How many months of expenses you want to keep safe before investing.</p></div></div>
+      <div class="step-connector"></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><h3>AI calculates safe disposable income</h3><p>We subtract everything, protect your buffer, and find what's truly free to invest.</p></div></div>
+      <div class="step-connector"></div>
+      <div class="step"><div class="step-num">6</div><div class="step-content"><h3>Get your safe SIP amount</h3><p>A number you can commit to without stress — and it adjusts automatically next month.</p></div></div>
+    </div>
+    <div style="margin-top:24px">
+      <button class="btn-primary" onclick="goPage('calc')">Try the calculator now</button>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<div class="page" id="page-calc">
+  <div class="section">
+    <div class="section-tag">SIP Calculator</div>
+    <h2>Find your safe SIP amount</h2>
+    <p class="sub">Move the sliders — your safe SIP updates instantly.</p>
+    <div class="calc-wrap">
+      <div class="input-row">
+        <label>Monthly income <span class="val" id="inc-val">₹25,000</span></label>
+        <input type="range" min="5000" max="200000" step="1000" value="25000" id="income" oninput="calcSIP()">
+      </div>
+      <div class="input-row">
+        <label>Fixed expenses (rent, EMI) <span class="val" id="fix-val">₹10,000</span></label>
+        <input type="range" min="0" max="150000" step="500" value="10000" id="fixed" oninput="calcSIP()">
+      </div>
+      <div class="input-row">
+        <label>Variable expenses (food, travel) <span class="val" id="var-val">₹7,000</span></label>
+        <input type="range" min="0" max="100000" step="500" value="7000" id="variable" oninput="calcSIP()">
+      </div>
+      <div class="input-row">
+        <label>Emergency buffer (months) <span class="val" id="buf-val">2 months</span></label>
+        <input type="range" min="1" max="6" step="1" value="2" id="buffer" oninput="calcSIP()">
+      </div>
+      <div class="result-box">
+        <div style="font-size:13px;color:#0F6E56;margin-bottom:4px">Your safe SIP amount</div>
+        <div class="result-amount" id="sip-amount">₹4,000</div>
+        <div class="risk-bar"><div class="risk-fill" id="risk-fill" style="width:40%;background:var(--mint)"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#0F6E56"><span>Conservative</span><span>Moderate</span><span>Aggressive</span></div>
+        <p class="explanation" id="sip-explain">After covering your expenses and keeping a 2-month emergency buffer, you have ₹8,000 disposable. We recommend investing 50% as SIP for a healthy balance.</p>
+      </div>
+      <div style="margin-top:16px;text-align:center">
+        <button class="btn-primary" onclick="goPage('dashboard')">View my dashboard →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="section">
+    <div class="section-tag">Auto-Adjustment Dashboard</div>
+    <h2>Your SIP history</h2>
+    <p class="sub">See how your SIP has adapted to your financial life.</p>
+    <div class="dash-grid">
+      <div class="dash-card"><div class="num" style="color:var(--mint)">₹3,500</div><div class="lbl">Current SIP</div></div>
+      <div class="dash-card"><div class="num" style="color:#3B6D11">₹42,000</div><div class="lbl">Invested so far</div></div>
+      <div class="dash-card"><div class="num" style="color:var(--coral)">72</div><div class="lbl">Financial score</div></div>
+    </div>
+    <div style="margin-bottom:12px;font-size:13px;font-weight:500;color:var(--text2)">Monthly history</div>
+    <div class="history-row"><div><div style="font-size:14px;font-weight:500">May 2026</div><div style="font-size:12px;color:var(--text3)">Salary credit + low expenses</div></div><div style="text-align:right"><div style="font-weight:500;color:var(--mint)">₹4,000</div><span class="badge up">↑ Increased</span></div></div>
+    <div class="history-row"><div><div style="font-size:14px;font-weight:500">Apr 2026</div><div style="font-size:12px;color:var(--text3)">Normal month</div></div><div style="text-align:right"><div style="font-weight:500">₹3,500</div><span class="badge stable">Stable</span></div></div>
+    <div class="history-row"><div><div style="font-size:14px;font-weight:500">Mar 2026</div><div style="font-size:12px;color:var(--text3)">Medical expense this month</div></div><div style="text-align:right"><div style="font-weight:500;color:var(--coral)">₹1,500</div><span class="badge down">↓ Decreased</span></div></div>
+    <div class="history-row"><div><div style="font-size:14px;font-weight:500">Feb 2026</div><div style="font-size:12px;color:var(--text3)">Travel + shopping heavy</div></div><div style="text-align:right"><div style="font-weight:500;color:var(--amber)">₹0</div><span class="badge pause">⏸ Paused</span></div></div>
+    <div class="history-row"><div><div style="font-size:14px;font-weight:500">Jan 2026</div><div style="font-size:12px;color:var(--text3)">Bonus received</div></div><div style="text-align:right"><div style="font-weight:500;color:var(--mint)">₹5,000</div><span class="badge up">↑ Increased</span></div></div>
+    <div style="margin-top:20px;background:var(--mint-light);border-radius:12px;padding:16px">
+      <div style="font-size:13px;font-weight:500;color:#0F6E56;margin-bottom:4px">🔮 Projection</div>
+      <div style="font-size:13px;color:#0F6E56">At this rate, you'll accumulate approx. <strong>₹84,000</strong> in the next 12 months. Keep your streak going! 🎯</div>
+    </div>
+  </div>
+</div>
+
+<!-- LEARN -->
+<div class="page" id="page-learn">
+  <div class="section">
+    <div class="section-tag">SIP Learning Hub</div>
+    <h2>New to SIP? Start here</h2>
+    <p class="sub">Everything you need to know, in plain language.</p>
+    <div class="learn-card"><h3>📌 What is SIP?</h3><p>SIP stands for Systematic Investment Plan. It means investing a fixed amount in a mutual fund every month — like a recurring deposit, but in the stock market. Even ₹100/month works!</p></div>
+    <div class="learn-card"><h3>💡 Why SIP beats lump sum</h3><p>With SIP, you don't need to time the market. You buy more units when prices are low and fewer when prices are high — this is called rupee cost averaging. Over time, it smooths out market ups and downs.</p></div>
+    <div class="learn-card"><h3>📈 How SIP builds wealth over time</h3><p>₹500/month for 10 years at 12% return = <strong>₹1.16 lakhs invested → ₹2.3 lakhs in value</strong>. The magic is compounding — your returns earn returns too!</p><div class="tip-box">💡 The earlier you start, the more powerful compounding becomes. Starting at 20 vs 30 can double your final amount.</div></div>
+    <div class="learn-card"><h3>🚫 Common beginner mistakes</h3><p style="margin-bottom:8px">Avoid these to protect your investments:</p><ul style="padding-left:16px;font-size:13px;color:var(--text2);line-height:2"><li>Stopping SIP when market falls (that's actually the best time!)</li><li>Investing more than you can afford</li><li>Expecting quick profits — SIP is a 5+ year game</li><li>Not reviewing your SIP amount yearly</li></ul></div>
+  </div>
+</div>
+
+<!-- WOMEN & STUDENTS -->
+<div class="page" id="page-women">
+  <div class="section">
+    <div class="section-tag">For women & students</div>
+    <h2>Your first investment, done right</h2>
+    <p class="sub">EmpowerSIP is designed for those who are just starting out.</p>
+    <div class="highlight-card">
+      <h3 style="font-family:var(--serif);font-size:18px;margin-bottom:8px">Start with just ₹100/month</h3>
+      <p style="font-size:13px;color:var(--text2)">You don't need thousands to start investing. Pick any amount that feels safe:</p>
+      <div class="micro-sip">
+        <div class="sip-pill">₹100</div>
+        <div class="sip-pill">₹250</div>
+        <div class="sip-pill">₹500</div>
+        <div class="sip-pill">₹1,000</div>
+      </div>
+    </div>
+    <div class="card-grid" style="margin-top:12px">
+      <div class="card"><h3>🎯 Safety over returns</h3><p>We never push you to invest more than is safe. Your emergency fund always comes first.</p></div>
+      <div class="card"><h3>💬 No jargon</h3><p>Every recommendation is explained in the simplest language. No MBA needed.</p></div>
+      <div class="card"><h3>🔒 You stay in control</h3><p>Pause, stop, or change your SIP anytime. No lock-ins, no penalties.</p></div>
+      <div class="card"><h3>📱 5 min/month</h3><p>Review your SIP health once a month. That's all the time investing needs to take.</p></div>
+    </div>
+    <div style="margin-top:24px;text-align:center">
+      <button class="btn-primary" onclick="goPage('signup')">Join the waitlist →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="page" id="page-trust">
+  <div class="section">
+    <div class="section-tag">Trust & safety</div>
+    <h2>Your money, your rules</h2>
+    <p class="sub">We built EmpowerSIP on a foundation of trust.</p>
+    <div class="trust-grid">
+      <div class="card"><h3>🔐 Data privacy</h3><p style="font-size:13px;color:var(--text2);margin-top:4px">Your financial data is encrypted and never sold to third parties. Ever.</p></div>
+      <div class="card"><h3>🚫 No forced investments</h3><p style="font-size:13px;color:var(--text2);margin-top:4px">We only suggest. You decide. No auto-debit without your permission.</p></div>
+      <div class="card"><h3>👤 Full user control</h3><p style="font-size:13px;color:var(--text2);margin-top:4px">Pause, modify, or stop your SIP anytime in one tap. No questions asked.</p></div>
+      <div class="card"><h3>🏛️ Regulated platform</h3><p style="font-size:13px;color:var(--text2);margin-top:4px">All investment operations follow SEBI guidelines for mutual funds.</p></div>
+      <div class="card"><h3>⚠️ Emergency alerts</h3><p style="font-size:13px;color:var(--text2);margin-top:4px">We warn you before your SIP might affect your emergency buffer.</p></div>
+      <div class="card"><h3>📋 Transparent logic</h3><p style="font-size:13px;color:var(--text2);margin-top:4px">Every recommendation shows exactly how we calculated it. No black box.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP -->
+<div class="page" id="page-signup">
+  <div class="section">
+    <div class="signup-wrap">
+      <div style="font-size:32px;margin-bottom:8px">🌱</div>
+      <h2>Get early access</h2>
+      <p>Join hundreds of women and students already on the waitlist. Be first to invest smarter.</p>
+      <div class="email-row">
+        <input type="email" id="email-input" placeholder="your@email.com">
+        <button onclick="joinWaitlist()">Join →</button>
+      </div>
+      <div class="success-msg" id="success-msg">🎉 You're on the list! We'll reach out soon.</div>
+      <p style="font-size:12px;opacity:0.7;margin-top:16px">No spam. No pressure. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <button onclick="goPage('home')">Home</button><span>·</span>
+  <button onclick="goPage('how')">How it works</button><span>·</span>
+  <button onclick="goPage('calc')">Calculator</button><span>·</span>
+  <button onclick="goPage('dashboard')">Dashboard</button><span>·</span>
+  <button onclick="goPage('learn')">Learn</button><span>·</span>
+  <button onclick="goPage('women')">Women & Students</button><span>·</span>
+  <button onclick="goPage('trust')">Trust</button><span>·</span>
+  <button onclick="goPage('signup')">Sign up</button>
+</footer>
+
+<script>
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function fmt(n){return '₹'+Math.round(n).toLocaleString('en-IN')}
+function calcSIP(){
+  const inc=+document.getElementById('income').value;
+  const fix=+document.getElementById('fixed').value;
+  const varE=+document.getElementById('variable').value;
+  const buf=+document.getElementById('buffer').value;
+  document.getElementById('inc-val').textContent=fmt(inc);
+  document.getElementById('fix-val').textContent=fmt(fix);
+  document.getElementById('var-val').textContent=fmt(varE);
+  document.getElementById('buf-val').textContent=buf+' month'+(buf>1?'s':'');
+  const totalExp=fix+varE;
+  const disposable=inc-totalExp;
+  if(disposable<=0){
+    document.getElementById('sip-amount').textContent='₹0';
+    document.getElementById('risk-fill').style.width='0%';
+    document.getElementById('risk-fill').style.background='#E24B4A';
+    document.getElementById('sip-explain').textContent='Your expenses exceed your income. Focus on reducing expenses before investing.';
+    return;
+  }
+  const ratio=disposable/inc;
+  let sipPct,riskColor,riskW,advice;
+  if(ratio>0.4){sipPct=0.5;riskColor='#1D9E75';riskW='70%';advice='surplus';}
+  else if(ratio>0.2){sipPct=0.4;riskColor='#BA7517';riskW='45%';advice='moderate';}
+  else{sipPct=0.25;riskColor='#D85A30';riskW='20%';advice='tight';}
+  const sip=Math.round(disposable*sipPct/500)*500;
+  document.getElementById('sip-amount').textContent=fmt(sip);
+  document.getElementById('risk-fill').style.width=riskW;
+  document.getElementById('risk-fill').style.background=riskColor;
+  const msgs={
+    surplus:`After expenses, you have ${fmt(disposable)} free. We suggest investing ${Math.round(sipPct*100)}% as SIP — a healthy, sustainable amount.`,
+    moderate:`You have ${fmt(disposable)} disposable. A conservative ${Math.round(sipPct*100)}% SIP keeps your finances balanced.`,
+    tight:`Tight month — only ${fmt(disposable)} left. A small SIP of ${Math.round(sipPct*100)}% keeps your habit alive without stress.`
+  };
+  document.getElementById('sip-explain').textContent=msgs[advice];
+}
+function joinWaitlist(){
+  const email=document.getElementById('email-input').value;
+  if(email&&email.includes('@')){
+    document.getElementById('success-msg').style.display='block';
+    document.getElementById('email-input').value='';
+  }
+}
+calcSIP();
+</script>
+</body>
+</html>

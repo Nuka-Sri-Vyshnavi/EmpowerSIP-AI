@@ -1,6 +1,4 @@
-Got it! Here's the updated README — replace the old one:
-
-markdown# EmpowerSIP AI 🤖💰
+EmpowerSIP AI 🤖💰
 
 An AI-driven SIP (Systematic Investment Plan) platform designed for first-time investors in India.
 

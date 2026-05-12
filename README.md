@@ -1,9 +1,9 @@
-EmpowerSIP AI 🌱
+# EmpowerSIP AI 🌱
 
 An AI-driven platform that analyzes your monthly expenses and suggests a **safe SIP amount** that automatically increases, decreases, or pauses based on your financial situation.
 
 ## 🎯 Problem Statement
-Most first-time investors in India — especially women and students — don't know how much to invest safely. EmpowerSIP AI solves this by making SIP decisions intelligent and stress-free.
+Most first-time investors in India don't know how much to invest safely. EmpowerSIP AI solves this by making SIP decisions intelligent, personalized, and stress-free — for everyone.
 
 ## ✨ Features
 - AI-based safe SIP recommendation
@@ -20,18 +20,16 @@ Most first-time investors in India — especially women and students — don't k
 - Expense-Based SIP Calculator
 - Auto-Adjustment Dashboard
 - SIP Learning Hub
-- Women & Student Focus Section
 - Trust & Safety Page
 - Sign-Up / Waitlist Page
 
 ## 🛠 Tech Stack
-- React.js
-- HTML5 / CSS3
-- JavaScript (AI mock logic)
+- HTML5 / CSS3 / JavaScript
+- AI mock logic for SIP calculation
 
 ## 🚀 Live Demo
 Coming soon
 
 ## 👩‍💻 Author
-Nuka Sri Vyshnavi  
+Nuka Sri Vyshnavi
 B.Tech ECE — KL University Hyderabad
